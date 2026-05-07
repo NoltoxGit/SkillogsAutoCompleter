@@ -314,8 +314,9 @@ class SkillogsGUI:
         self.canvas.pack(side="left", fill="both", expand=True)
         self.scrollbar.pack(side="right", fill="y")
 
-        # Mouse-wheel scrolling
-        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        # Mouse-wheel scrolling — only when cursor is over the URL list
+        self.canvas.bind("<Enter>", lambda e: self.canvas.bind_all("<MouseWheel>", self._on_mousewheel))
+        self.canvas.bind("<Leave>", lambda e: self.canvas.unbind_all("<MouseWheel>"))
 
         # ── Add button ───────────────────────────────────────────────────────
         add_frame = tk.Frame(self.root, bg=BG_DARK)
